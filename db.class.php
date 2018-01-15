@@ -32,7 +32,7 @@ class DB {
       $data[] = $row;
     }
     
-    mysqli_free_result($sql);
+    mysqli_free_result($result);
     
     return $data;
   }
