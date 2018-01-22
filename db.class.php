@@ -11,6 +11,7 @@ class DB {
       throw new Exception('Could not connect to DB');
     }
   }
+  
   public function query($sql) {
     if ( !$this->connection ) {
       return false;
