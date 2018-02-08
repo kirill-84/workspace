@@ -21,7 +21,7 @@ echo "<p>Table cart items</p>";
 $books = $db->query("SELECT * FROM books");
   
 foreach($books as $book){
-  echo "<p><b>{$book['title']}</b> <a href="cart.php?action=add&id={$book['id']}">add to cart</a></p>";
+  echo "<p><b>{$book['title']}</b> <a href='cart.php?action=add&id={$book['id']}'>add to cart</a></p>";
 }
   
 } catch (Exception $e) {
