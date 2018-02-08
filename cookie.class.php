@@ -8,6 +8,7 @@ abstract class Cookie(){
     if(isset($_COOKIE[$key])){
       return $_COOKIE[$key];
     }
+    return null;
   }
   
   public static function delete($key){
