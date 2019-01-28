@@ -3,7 +3,7 @@ class Cart{
   private $products;
   
   function __construct(){
-    $this->products = Cookie::get('item') == null ? $array() : unserialize(Cookie::get('item'));
+    $this->products = Cookie::get('item') == null ? array() : unserialize(Cookie::get('item'));
   }
   
   public function getProducts($for_sql = false){
