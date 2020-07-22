@@ -19,7 +19,7 @@ $cart = new Cart();
 
 $db = new DB($db_host, $db_user, $db_password, $db_name);
 
-$action = isset($_GET['id']) ? $_GET['id'] : 'list';
+$action = isset($_GET['action']) ? $_GET['action'] : 'list';
 
 if($action == 'add'){
   $id = $_GET['id'];
