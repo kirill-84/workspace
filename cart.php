@@ -23,7 +23,7 @@ $action = isset($_GET['action']) ? $_GET['action'] : null;
 
 if($action == 'add'){
   $id = $_GET['id'];
-  $cart->addProducts($id);
+  $cart->addProduct($id);
   
   header('Location: index.php');
 } elseif ($action == 'delete') {
