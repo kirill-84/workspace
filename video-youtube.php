@@ -8,8 +8,8 @@ $apiError = 'Video not found';
 try{
 	$apiData = @file_get_contents('https://www.googleapis.com/youtube/v3/search?order=date&part=snippet&channelId='.$Channel_ID.'&maxResults='.$Max_Results.'&key='.$API_Key.'');
 	if($apiData){
-    $videoList = json_decode($apiData); 
-	}else{ 
+    		$videoList = json_decode($apiData); 
+	}else{
 	    throw new Exception('Invalid API key or channel ID.'); 
 	}
 }catch(Exception $e){
