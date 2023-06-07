@@ -1,15 +1,13 @@
 <!doctype html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>Поиск по многоуровнему списку</title>
 </head>
 <body>
-
-<input type="text" id="searchInput" placeholder="Search for users">
+<input type="text" id="searchInput" placeholder="Поиск...">
 <ul id="originalList">
    <li>001
      <ul style="display: none">
@@ -17,9 +15,9 @@
          <ul style="display: none">
            <li>last category
              <ul style="display: none">
-               <li>Egor</li>
-               <li>Peter</li>
-               <li>Alexey</li>
+               <li>Егор</li>
+               <li>Пётр</li>
+               <li>Алексей</li>
              </ul>
            </li>
          </ul>
@@ -28,13 +26,13 @@
    </li>
    <li>002
      <ul style="display: none">
-       <li>Andrey</li>
-       <li>Egor</li>
-       <li>Vladimir</li>
+       <li>Андрей</li>
+       <li>Егор</li>
+       <li>Владимир</li>
      </ul>
    </li>
 </ul>
-<div id="searchResult" style="display: none;">No results found.</div>
+<div id="searchResult" style="display: none;">Результатов нет.</div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
@@ -77,6 +75,6 @@ $(document).ready(function() {
   };
 });
 </script>
-  
+
 </body>
 </html>
