@@ -37,42 +37,56 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function() {
-  var originalList = $('#originalList').html(); // Store the original HTML of the list
+  // Save the original list
+  var originalList = $("#originalList").html();
 
-  $('#searchInput').on('input', function() {
-    var searchText = $(this).val().trim().toLowerCase();
-    if (searchText.length >= 3) { // Start searching after three letters are entered
-      $('#originalList').html(originalList); // Restore the original HTML of the list
+  // Event listener for search input
+  $("#searchInput").on("input", function() {
+    var searchText = $(this).val().toLowerCase();
 
-      var matchingItems = $('#originalList').find('li:icontains("' + searchText + '")'); // Find matching list items (case-insensitive)
+    // Clear previous search results
+    $("#originalList").html(originalList);
 
-      if (matchingItems.length > 0) {
-        // Show matching items and their parent lists
-        matchingItems.each(function() {
-          $(this).show();
-          $(this).parents('li').show();
-          $(this).parents('ul').show();
-        });
-
-        // Hide non-matching items and their child lists
-        $('#originalList').find('li').not(matchingItems).hide();
-        $('#originalList').find('li').not(matchingItems).find('ul').hide();
-
-        $('#searchResult').hide(); // Hide the "No results found" message if it was shown previously
-      } else {
-        $('#originalList').html(''); // Clear the list if no results are found
-        $('#searchResult').show(); // Show the "No results found" message
-      }
+    // Perform search after 3 letters
+    if (searchText.length >= 3) {
+      searchAndDisplayResults(searchText);
     } else {
-      $('#originalList').html(originalList); // Restore the original HTML of the list
-      $('#searchResult').hide(); // Hide the "No results found" message
+      // Hide all child ul elements
+      $("#originalList ul").hide();
     }
   });
 
-  // Custom jQuery extension for case-insensitive :contains selector
-  $.expr[':'].icontains = function(a, i, m) {
-    return $(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
-  };
+  // Function to search and display results
+  function searchAndDisplayResults(searchText) {
+    var $listItems = $("#originalList li");
+
+    $listItems.each(function() {
+      var $currentItem = $(this);
+      var $childUl = $currentItem.find("ul");
+
+      // Check if the current item contains the search text
+      if ($currentItem.text().toLowerCase().includes(searchText)) {
+        // Show the current item
+        $currentItem.show();
+        $currentItem.parents("li").show();
+
+        // Show all parent ul elements
+        $currentItem.parents("ul").show();
+
+        // Show all child ul elements
+        $childUl.show();
+      } else {
+        // Hide the current item and its children
+        $currentItem.hide();
+        $childUl.hide();
+      }
+    });
+
+    // Check if no results were found
+    if ($("#originalList li:visible").length === 0) {
+      $("#originalList").html("<li>No results found.</li>");
+    }
+  }
 });
 </script>
 
