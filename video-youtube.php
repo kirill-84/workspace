@@ -1,7 +1,7 @@
 <?php
 // Added last four video from youtube channel
-$API_Key    = 'AIzaSyDT31pKDmCRbWdrOLywJlun9Kahoja0JNQ'; 
-$Channel_ID = 'UCUs9v1KvcSfZIc34PTviqOQ'; 
+$API_Key    = ''; 
+$Channel_ID = ''; 
 $Max_Results = 4;
 
 $apiError = 'Video not found';
