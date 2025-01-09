@@ -1,2 +1,2 @@
 # My workspace
-Shopping cart example. To be continued...
+Simple shopping cart example using cookies.
