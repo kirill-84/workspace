@@ -1,17 +1,15 @@
-<div class="ratio ratio-16x9">
-                            <video id="bestiaryVideo" class="object-fit-cover lazy" poster="{{ asset('img/bestiary.jpg') }}" autoplay="autoplay" muted="muted" preload="auto" loop="loop" preload="yes" playsinline="playsinline" tabindex="0"></video>
-                        </div>
-
-<script>
-        function updateVideoSource() {
+function updateVideoSource() {
     const video = document.getElementById('bestiaryVideo');
-    const desktopSrc = "{{ asset('https://cdn.moscow-bestiary.ru/videos/bestiary.mp4') }}";
-    const mobileSrc = "{{ asset('https://cdn.moscow-bestiary.ru/videos/bestiary-mob.mp4') }}";
+    // Функция asset() не должна использоваться с полными URL
+    const desktopSrc = "https://cdn.moscow-bestiary.ru/videos/bestiary.mp4";
+    const mobileSrc = "https://cdn.moscow-bestiary.ru/videos/bestiary-mob.mp4";
     var ratioClass = document.querySelector('.ratio');
     
     // Удаляем существующие <source> элементы
-    video.innerHTML = '';
-
+    while (video.firstChild) {
+        video.removeChild(video.firstChild);
+    }
+    
     if (window.innerWidth > 576) {
         const source = document.createElement('source');
         source.dataset.src = desktopSrc;
@@ -30,26 +28,31 @@
     
     // Перезагружаем видео, чтобы применить новый источник
     video.load();
+    
+    // Если видео уже не имеет класса lazy, запускаем его
+    if (!video.classList.contains('lazy')) {
+        video.play();
+    }
 }
 
 function setupLazyLoading() {
     var lazyVideos = [].slice.call(document.querySelectorAll("video.lazy"));
     if ("IntersectionObserver" in window) {
         var lazyVideoObserver = new IntersectionObserver(function (entries, observer) {
-            entries.forEach(function (video) {
-                if (video.isIntersecting) {
-                    for (var source of video.target.children) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    for (var source of entry.target.children) {
                         if (typeof source.tagName === "string" && source.tagName === "SOURCE") {
                             source.src = source.dataset.src;
                         }
                     }
-                    video.target.load();
-                    video.target.classList.remove("lazy");
-                    lazyVideoObserver.unobserve(video.target);
+                    entry.target.load();
+                    entry.target.play(); // Запускаем видео после загрузки
+                    entry.target.classList.remove("lazy");
+                    lazyVideoObserver.unobserve(entry.target);
                 }
             });
         });
-
         lazyVideos.forEach(function (lazyVideo) {
             lazyVideoObserver.observe(lazyVideo);
         });
@@ -61,4 +64,3 @@ document.addEventListener('DOMContentLoaded', function () {
     updateVideoSource(); // Устанавливаем источник при загрузке страницы
     setupLazyLoading();  // Настройка ленивой загрузки
 });
-    </script>
