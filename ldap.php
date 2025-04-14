@@ -1,3 +1,5 @@
+Uncaught (in promise) DOMException: The fetching process for the media resource was aborted by the user agent at the user's request.
+
 function updateVideoSource() {
     const video = document.getElementById('bestiaryVideo');
     // Функция asset() не должна использоваться с полными URL
